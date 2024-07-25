@@ -16,6 +16,7 @@ class TasksController < ApplicationController
     if @task.save
         redirect_to tasks_path, notice: 'Task was successfully created.'
     else
+      flash.now[:alert] = 'Task cloud not be created.'
         render :new
     end
   end
@@ -27,8 +28,9 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-        redirect_to tasks_path, notice: 'Task was successfully updated.'
+        redirect_to task_path(@task), notice: 'Task was successfully updated.'
     else
+      flash.now[:alert] = 'Task cloud not be updated.'
         render :edit
     end
   end

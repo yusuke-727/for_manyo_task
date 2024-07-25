@@ -1,5 +1,4 @@
 <h1>Tasks Index Page</h1>
-<%= link_to 'New Task', new_task_path %>
 
 <table>
   <thead>
@@ -7,7 +6,6 @@
      <th>Title</th>
      <th>Content</th>
      <th>Created_at</th>
-     <th></th>
     </tr>
   </thead>
 
@@ -17,12 +15,10 @@
      <td><%= task.title %></td>
      <td><%= task.content %></td>
      <td><%= task.created_at %></td>
-     <td>
-      <%= link_to 'Show', task_path(task) %> |
-      <%= link_to 'Edit', edit_task_path(task) %> |
-      <%= link_to 'Destroy', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %>
-    </td>
-    </tr>
+     <td><%= link_to 'Show', task_path(task), class: 'show-task' %></td>
+     <td><%= link_to 'Edit', edit_task_path(task), class: 'edit-task' %></td>
+     <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: 'destroy-task' %></td>
+     </tr>
  <% end %>
 </tbody>
 </table>
