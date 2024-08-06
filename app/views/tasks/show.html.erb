@@ -1,32 +1,32 @@
 <h1><%= t('views.tasks.show.title') %></h1>
 
 <p>
- <strong><%= t('views.tasks.show.attributes.title') %>:</strong>
+  <strong><%= t('views.tasks.show.attributes.title') %>:</strong>
   <%= @task.title %>
 </p>
 
 <p>
- <strong><%= t('views.tasks.show.attributes.content') %></strong>
+  <strong><%= t('views.tasks.show.attributes.content') %>:</strong>
   <%= @task.content %>
 </p>
 
 <p>
- <strong><%= t('views.tasks.show.attributes.created_at') %>:</strong>
+  <strong><%= t('views.tasks.show.attributes.created_at') %>:</strong>
   <%= @task.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
 </p>
 
 <p>
- <strong><%= Task.human_attribute_name(:deadline_on) %>:</strong>
+  <strong><%= t('views.tasks.show.attributes.deadline_on') %>:</strong>
   <%= @task.deadline_on %>
 </p>
 
 <p>
- <strong><%= Task.human_attribute_name(:priority) %>:</strong>
+  <strong><%= t('views.tasks.show.attributes.priority') %>:</strong>
   <%= I18n.t("tasks.priority.#{@task.priority}") %>
 </p>
 
 <p>
- <strong><%= Task.human_attribute_name(:status) %>:</strong>
+  <strong><%= t('views.tasks.show.attributes.status') %>:</strong>
   <%= I18n.t("tasks.status.#{@task.status}") %>
 </p>
 

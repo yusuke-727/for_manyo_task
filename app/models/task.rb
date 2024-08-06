@@ -30,9 +30,10 @@ class Task < ApplicationRecord
     if params[:sort_deadline_on]
       order(deadline_on: :asc)
     elsif params[:sort_priority]
-      order(priority: :desc)
+      order(priority: :desc, created_at: :desc)  # 優先度の降順と作成日時の降順
     else
       order(created_at: :desc)
     end
   }
 end
+
