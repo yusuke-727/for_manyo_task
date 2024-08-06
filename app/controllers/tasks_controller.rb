@@ -1,11 +1,12 @@
 class TasksController < ApplicationController
- def index
-  @tasks = Task.order(created_at: :desc).page(params[:page]).per(10)
- end
+  def index
+    # 検索とソートの適用
+    @tasks = Task.search(params).sorted(params).page(params[:page]).per(10)
+  end
 
- def show
+  def show
     @task = Task.find(params[:id])
- end
+  end
 
   def new
     @task = Task.new
@@ -14,34 +15,35 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-        redirect_to tasks_path, notice: t('views.tasks.flash.create')
+      redirect_to tasks_path, notice: t('views.tasks.flash.create')
     else
-        render :new
+      render :new
     end
   end
 
   def edit
     @task = Task.find(params[:id])
   end
-  
+
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-        redirect_to task_path(@task), notice: t('views.tasks.flash.update')
+      redirect_to task_path(@task), notice: t('views.tasks.flash.update')
     else
       render :edit
     end
   end
 
-def destroy
+  def destroy
     @task = Task.find(params[:id])
     @task.destroy
     redirect_to tasks_path, notice: t('views.tasks.flash.destroy')
+  end
+
+  private
+
+  def task_params
+    params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+  end
 end
 
-private
-
- def task_params
-    params.require(:task).permit(:title, :content)
- end
-end

@@ -1,30 +1,45 @@
 <h1><%= t('views.tasks.edit.title') %></h1>
 <%= form_with model: @task, local: true do |form| %>
-    <% if @task.errors.any? %>
-     <div id="error_explanation">
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
       <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
       <ul>
         <% @task.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
-       </ul>
-     </div>
-    <% end %>
-
-    <div class="field">
-        <%= form.label :title, t('views.tasks.edit.form.title') %><br>
-        <%= form.text_field :title %>
+      </ul>
     </div>
+  <% end %>
 
-    <div class="field">
-      <%= form.label :content, t('views.tasks.edit.form.content') %><br>
-      <%= form.text_area :content %>
-    </div>
+  <div class="field">
+    <%= form.label :title, t('views.tasks.edit.form.title') %><br>
+    <%= form.text_field :title %>
+  </div>
 
-    <div class="actions">
-      <%= form.submit t('views.tasks.edit.form.update'), id: 'update-task' %>
-    </div>
+  <div class="field">
+    <%= form.label :content, t('views.tasks.edit.form.content') %><br>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline_on, t('views.tasks.edit.form.deadline_on') %><br>
+    <%= form.date_field :deadline_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority, t('views.tasks.edit.form.priority') %><br>
+    <%= form.select :priority, [['', '']] + Task.priorities.keys.map { |w| [I18n.t("tasks.priority.#{w}"), w] } %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status, t('views.tasks.edit.form.status') %><br>
+    <%= form.select :status, Task.statuses.keys.map { |w| [I18n.t("tasks.status.#{w}"), w] } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit t('views.tasks.edit.form.update'), id: 'update-task' %>
+  </div>
 <% end %>
 
 <%= link_to t('views.tasks.edit.form.back'), tasks_path, id: 'back' %>
