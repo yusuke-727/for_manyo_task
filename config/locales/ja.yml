@@ -67,9 +67,9 @@ ja:
             deadline_on:
               blank: "終了期限を入力してください"
             priority:
-              blank: "優先度を選択してください"
+              blank: "優先度を入力してください"
             status:
-              blank: "ステータスを選択してください"
+              blank: "ステータスを入力してください"
   tasks:
     priority:
       low: "低"
