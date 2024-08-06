@@ -10,6 +10,13 @@ ja:
           title: "タイトル"
           content: "内容"
           created_at: "作成日時"
+          deadline_on: "終了期限"
+          priority: "優先度"
+          status: "ステータス"
+        search:
+          status: "ステータス"
+          title: "タイトル"
+          submit: "検索"
         actions:
           show: "詳細"
           edit: "編集"
@@ -20,6 +27,9 @@ ja:
         form:
           title: "タイトル"
           content: "内容"
+          deadline_on: "終了期限"
+          priority: "優先度"
+          status: "ステータス"
           create: "登録する"
           back: "戻る"
       show:
@@ -28,11 +38,17 @@ ja:
           title: "タイトル"
           content: "内容"
           created_at: "作成日時"
+          deadline_on: "終了期限"
+          priority: "優先度"
+          status: "ステータス"
       edit:
         title: "タスク編集ページ"
         form:
           title: "タイトル"
           content: "内容"
+          deadline_on: "終了期限"
+          priority: "優先度"
+          status: "ステータス"
           update: "更新する"
           back: "戻る"
       flash:
@@ -48,4 +64,18 @@ ja:
               blank: "タイトルを入力してください"
             content:
               blank: "内容を入力してください"
-
+            deadline_on:
+              blank: "終了期限を入力してください"
+            priority:
+              blank: "優先度を選択してください"
+            status:
+              blank: "ステータスを選択してください"
+  tasks:
+    priority:
+      low: "低"
+      medium: "中"
+      high: "高"
+    status:
+      not_started: "未着手"
+      in_progress: "着手中"
+      done: "完了"
