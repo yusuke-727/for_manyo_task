@@ -21,6 +21,21 @@
     <%= form.text_area :content %>
   </div>
 
+  <div class="field">
+    <%= form.label :deadline_on, t('views.tasks.new.form.deadline_on') %><br>
+    <%= form.date_field :deadline_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :priority, t('views.tasks.new.form.priority') %><br>
+    <%= form.select :priority, options_for_select(Task.priorities.keys.map { |w| [I18n.t("tasks.priority.#{w}"), w] }, selected: ''), {include_blank: true} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status, t('views.tasks.new.form.status') %><br>
+    <%= form.select :status, options_for_select(Task.statuses.keys.map { |w| [I18n.t("tasks.status.#{w}"), w] }, selected: ''), {include_blank: true} %>
+  </div>
+
   <div class="actions">
     <%= form.submit t('views.tasks.new.form.create'), id: 'create-task' %>
   </div>
