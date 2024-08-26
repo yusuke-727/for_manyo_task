@@ -1,29 +1,38 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-50.times do |i|
-    Task.create(
-        title: "タスク#{i + 1}",
-        content: "タスク#{i + 1}の内容"
-    )
+# ユーザーを作成
+user = User.create!(
+  name: '一般ユーザー',
+  email: 'user@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  admin: false
+)
+
+admin_user = User.create!(
+  name: '管理者ユーザー',
+  email: 'admin@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  admin: true
+)
+
+# 一般ユーザーに関連付けられたタスクを50件作成
+50.times do |n|
+  user.tasks.create!(
+    title: "一般ユーザーのタスク#{n + 1}",
+    content: "これは一般ユーザーのタスク#{n + 1}です。",
+    deadline_on: Date.today + (n + 1).days,
+    priority: rand(0..2), # 0: 低, 1: 中, 2: 高
+    status: rand(0..2)   # 0: 未着手, 1: 着手中, 2: 完了
+  )
 end
 
-# 新しい10件のタスクを追加
-Task.create!(
-  [
-    { title: 'first_task', content: '任意の内容1', deadline_on: '2022-02-18', priority: 'medium', status: 'not_started' },
-    { title: 'second_task', content: '任意の内容2', deadline_on: '2022-02-17', priority: 'high', status: 'in_progress' },
-    { title: 'third_task', content: '任意の内容3', deadline_on: '2022-02-16', priority: 'low', status: 'done' },
-    { title: 'fourth_task', content: '任意の内容4', deadline_on: '2022-03-01', priority: 'high', status: 'not_started' },
-    { title: 'fifth_task', content: '任意の内容5', deadline_on: '2022-03-02', priority: 'medium', status: 'in_progress' },
-    { title: 'sixth_task', content: '任意の内容6', deadline_on: '2022-03-03', priority: 'low', status: 'done' },
-    { title: 'seventh_task', content: '任意の内容7', deadline_on: '2022-03-04', priority: 'high', status: 'not_started' },
-    { title: 'eighth_task', content: '任意の内容8', deadline_on: '2022-03-05', priority: 'medium', status: 'in_progress' },
-    { title: 'ninth_task', content: '任意の内容9', deadline_on: '2022-03-06', priority: 'low', status: 'done' },
-    { title: 'tenth_task', content: '任意の内容10', deadline_on: '2022-03-07', priority: 'high', status: 'not_started' }
-  ]
-)
+# 管理者ユーザーに関連付けられたタスクを50件作成
+50.times do |n|
+  admin_user.tasks.create!(
+    title: "管理者ユーザーのタスク#{n + 1}",
+    content: "これは管理者ユーザーのタスク#{n + 1}です。",
+    deadline_on: Date.today + (n + 1).days,
+    priority: rand(0..2), # 0: 低, 1: 中, 2: 高
+    status: rand(0..2)   # 0: 未着手, 1: 着手中, 2: 完了
+  )
+end

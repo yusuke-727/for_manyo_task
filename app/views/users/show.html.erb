@@ -1,0 +1,6 @@
+<h1><%= t('views.users.show.title') %></h1>
+
+<p><strong><%= t('views.users.show.name') %>:</strong> <%= @user.name %></p>
+<p><strong><%= t('views.users.show.email') %>:</strong> <%= @user.email %></p>
+
+<%= link_to t('views.users.show.edit'), edit_user_path(@user), id: 'edit-user' %>
