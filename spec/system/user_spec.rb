@@ -72,7 +72,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
         fill_in 'session_email', with: user.email  # 修正箇所
         fill_in 'session_password', with: user.password  # 修正箇所
         click_button 'ログイン'
-        click_link 'logout-link'
+        click_link 'sign-out'
         expect(page).to have_content 'ログアウトしました'
         expect(page).to have_current_path login_path
       end
