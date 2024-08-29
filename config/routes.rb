@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, path_names: {
       new: 'new_admin_user',
-      edit: 'edit_admin_user'
+      edit: 'edit_admin_user',
+      show: 'admin_user'
     }
   end
 
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :tasks
 
-  resources :users, only: [:new, :create, :show, :edit, :update], path_names: {
+  resources :users, only: [:new, :create, :show, :edit, :update], path: 'user', path_names: {
     new: 'new_user',
     edit: 'edit_user'
   }
