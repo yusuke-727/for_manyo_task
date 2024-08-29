@@ -19,8 +19,8 @@ Rails.application.routes.draw do
     new: 'new_session'
   }
   
-  get 'login', to: 'sessions#new', as: 'login'
-  post 'login', to: 'sessions#create'
+  # get 'login', to: 'sessions#new', as: 'login'
+  post 'session/new_session', to: 'sessions#create', as: 'create_session'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 end
 
