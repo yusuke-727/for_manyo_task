@@ -5,6 +5,7 @@ class AddUserIdToTasks < ActiveRecord::Migration[6.1]
 
     # 既存のタスクにデフォルトのユーザーIDを設定します（ID=1のユーザーを想定）
     # Userが存在する場合にのみIDを設定する
+    # マイグレーションファイルで使えるメソッドのみに変更
     reversible do |dir|
     dir.up do
       if User.exists?

@@ -27,7 +27,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
 
     context '登録済みのユーザでログインした場合' do
       it 'タスク一覧画面に遷移し、「ログインしました」というメッセージが表示される' do
-        visit login_path
+        visit new_session_path
         fill_in 'session_email', with: user.email  # 修正箇所
         fill_in 'session_password', with: user.password  # 修正箇所
         click_button 'ログイン'
@@ -36,7 +36,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
       end
 
       it '自分の詳細画面にアクセスできる' do
-        visit login_path
+        visit new_session_path
         fill_in 'session_email', with: user.email
         fill_in 'session_password', with: user.password
 
@@ -51,7 +51,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
       it '他人の詳細画面にアクセスすると、タスク一覧画面に遷移する' do
         other_user = FactoryBot.create(:user)
         # ログイン処理を実際のフォームを使って行う
-        visit login_path
+        visit new_session_path
         fill_in 'session_email', with: user.email
         fill_in 'session_password', with: user.password
         click_button 'ログイン'
@@ -68,13 +68,13 @@ RSpec.describe 'ユーザ管理機能', type: :system do
       end
 
       it 'ログアウトするとログイン画面に遷移し、「ログアウトしました」というメッセージが表示される' do
-        visit login_path
+        visit new_session_path
         fill_in 'session_email', with: user.email  # 修正箇所
         fill_in 'session_password', with: user.password  # 修正箇所
         click_button 'ログイン'
         click_link 'sign-out'
         expect(page).to have_content 'ログアウトしました'
-        expect(page).to have_current_path login_path
+        expect(page).to have_current_path new_session_path
       end
       
     end
@@ -133,7 +133,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
         # ログアウト処理を追加
         click_link 'ログアウト'
 
-        visit login_path
+        visit new_session_path
         fill_in 'session_email', with: another_admin.email
         fill_in 'session_password', with: another_admin.password
         click_button 'ログイン'      
