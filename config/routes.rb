@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :users, path_names: {
-      new: 'new_admin_user',
-      edit: 'edit_admin_user',
-      show: 'admin_user'
-    }
+    new: 'new_admin_user',
+    edit: 'edit_admin_user'
+  } do
+    member do
+      get 'admin/user', to: 'users#show', as: 'admin_user'
+    end
   end
+end
 
   root to: 'tasks#index'
 
   resources :tasks
 
-  resources :users, only: [:new, :create, :show, :edit, :update], path: 'user', path_names: {
+  resources :users, only: [:new, :create, :show, :edit, :update], path_names: {
     new: 'new_user',
     edit: 'edit_user'
   }
