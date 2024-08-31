@@ -10,7 +10,6 @@
     <tr>
       <th>タイトル</th>
       <th>内容</th>
-      <th>作成日時</th>
       <th>終了期限</th>
       <th>優先度</th>
       <th>ステータス</th>
@@ -21,7 +20,6 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
-        <td><%= task.created_at.strftime("%Y/%m/%d %H:%M") %></td>
         <td><%= task.deadline_on.strftime("%Y/%m/%d") %></td>
         <td><%= I18n.t("enums.priority.#{task.priority}") %></td>
         <td><%= I18n.t("enums.status.#{task.status}") %></td>        

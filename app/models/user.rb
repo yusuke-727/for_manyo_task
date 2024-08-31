@@ -15,7 +15,7 @@ class User < ApplicationRecord
                                     confirmation: true
 
   # コールバック
-  before_destroy :ensure_admin_remains
+  before_destroy :ensure_admin_remains, prepend: true
   before_update :ensure_admin_remains_for_update
 
   # タスク数を返すメソッド

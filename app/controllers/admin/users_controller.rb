@@ -27,7 +27,7 @@ module Admin
 
     def update
       if @user.update(user_params)
-        redirect_to admin_user_path(@user), notice: "ユーザ情報を更新しました"
+        redirect_to admin_users_path, notice: "ユーザを更新しました"
       else
         render :edit
       end
@@ -35,9 +35,11 @@ module Admin
 
     def destroy
       @user = User.find(params[:id])
-      @user.destroy
-      flash[:notice] = 'ユーザを削除しました'
-      redirect_to admin_users_path
+      if @user.destroy
+        flash[:notice] = 'ユーザを削除しました'
+      else
+        flash[:alert] = @user.errors.full_messages.join(', ')
+      end      redirect_to admin_users_path
     end
 
     private
