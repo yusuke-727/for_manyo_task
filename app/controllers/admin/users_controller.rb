@@ -35,11 +35,9 @@ module Admin
 
     def destroy
       @user = User.find(params[:id])
-      if @user.destroy
-        flash[:notice] = 'ユーザを削除しました'
-      else
-        flash[:alert] = @user.errors.full_messages.join(', ')
-      end      redirect_to admin_users_path
+      @user.destroy
+      flash[:notice] = 'ユーザを削除しました'
+      redirect_to admin_users_path
     end
 
     private
