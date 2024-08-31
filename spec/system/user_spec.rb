@@ -163,3 +163,46 @@ RSpec.describe 'ユーザ管理機能', type: :system do
     end
   end
 end
+
+
+RSpec.describe 'step4', type: :system do
+
+  let!(:user) do
+    user = User.create(name: 'user_name', email: 'user@email.com', password: 'password')
+    puts user.errors.full_messages unless user.persisted?
+    user
+  end
+
+  let!(:admin) do
+    admin = User.create(name: 'admin_name', email: 'admin@email.com', password: 'password', admin: true)
+    puts admin.errors.full_messages unless admin.persisted?
+    admin
+  end
+
+  describe '画面遷移要件' do
+    describe '1.要件通りにパスのプレフィックスが使用できること' do
+      context 'ログアウト中の場合' do
+        it '要件通りにパスのプレフィックスが使用できること' do
+          visit new_session_path
+          visit new_user_path
+        end
+      end
+      context '一般ユーザでログイン中の場合' do
+        before do
+          visit root_path
+          find('#sign-in').click
+          find('input[name="session[email]"]').set(user.email)
+          find('input[name="session[password]"]').set(user.password)
+          find('#create-session').click
+
+          puts user.inspect  # user オブジェクトの内容を確認
+          puts User.find_by(email: 'user@email.com').inspect  # データベース内のユーザーを確認
+        end
+        it '要件通りにパスのプレフィックスが使用できること' do
+          visit user_path(user)
+          visit edit_user_path(user)
+        end
+      end
+    end
+  end  
+end

@@ -1,15 +1,15 @@
 # ユーザーを作成
 user = User.create!(
-  name: '一般ユーザー',
-  email: 'user@example.com',
+  name: 'user_name',
+  email: 'user@email.com',
   password: 'password',
   password_confirmation: 'password',
   admin: false
 )
 
 admin_user = User.create!(
-  name: '管理者ユーザー',
-  email: 'admin@example.com',
+  name: 'admin_name',
+  email: 'admin@email.com',
   password: 'password',
   password_confirmation: 'password',
   admin: true
