@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update]
+  #before_action :set_user, only: [:show, :edit, :update]
   before_action :correct_user, only: [:show, :edit, :update]
 
   def new
@@ -20,15 +20,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    # @user は set_user で設定されています
-  end
+    @user = User.find(params[:id])
+  end  
 
   def edit
-    # @user は set_user で設定されています
+    @user = User.find(params[:id])
   end
 
   def update
-    # @user は set_user で設定されています
+    @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = I18n.t('notices.account_updated')
       redirect_to @user
@@ -39,15 +39,16 @@ class UsersController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
-  end
+  #def set_user
+    #@user = User.find(params[:id])
+  #end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
   def correct_user
+    @user = User.find(params[:id]) 
     unless @user == current_user || current_user.admin?
       redirect_to tasks_path, alert: "管理者以外アクセスできません"
     end
