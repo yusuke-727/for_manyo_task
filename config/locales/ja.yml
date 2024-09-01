@@ -55,7 +55,7 @@ ja:
     status:
       not_started: "未着手"
       in_progress: "着手中"
-      completed: "完了"
+      done: "完了"
   tasks:
     priority:
       low: "低"
