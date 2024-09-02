@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  belongs_to :user  # この行を追加
+
   enum priority: { low: 0, medium: 1, high: 2 }
   enum status: { not_started: 0, in_progress: 1, done: 2 }
 
@@ -13,14 +15,10 @@ class Task < ApplicationRecord
     tasks = all
     if params[:search].present?
       if params[:search][:title].present?
-        puts "検索条件: タイトル = #{params[:search][:title]}"
         tasks = tasks.where("title LIKE ?", "%#{params[:search][:title]}%")
-        puts "SQLクエリ: #{tasks.to_sql}"
       end
       if params[:search][:status].present?
-        puts "検索条件: ステータス = #{params[:search][:status]}"
         tasks = tasks.where(status: params[:search][:status])
-        puts "SQLクエリ: #{tasks.to_sql}"
       end
     end
     tasks
@@ -36,4 +34,3 @@ class Task < ApplicationRecord
     end
   }
 end
-

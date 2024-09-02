@@ -1,0 +1,39 @@
+<h1><%= t('views.users.new.title') %></h1>
+
+<%= form_with(model: @user, local: true) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% @user.errors.each do |attribute, message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, t('views.users.new.form.name') %><br>
+    <%= form.text_field :name, id: 'name' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, t('views.users.new.form.email') %><br>
+    <%= form.text_field :email, type: 'text', id: 'email' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password, t('views.users.new.form.password') %><br>
+    <%= form.password_field :password, id: 'password' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation, t('views.users.new.form.password_confirmation') %><br>
+    <%= form.password_field :password_confirmation, id: 'password_confirmation' %>
+</div>
+
+  <div class="actions">
+    <%= form.submit t('views.users.new.form.create'), id: 'create-user' %>
+  </div>
+<% end %>

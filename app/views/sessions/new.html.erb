@@ -1,0 +1,17 @@
+<h1><%= t('views.sessions.new.title') %></h1>
+
+<%= form_with(url: new_session_path, local: true, scope: :session) do |form| %>
+  <div class="field">
+    <%= form.label :email, t('views.sessions.new.form.email') %><br>
+    <%= form.text_field :email, id: 'session_email', type: 'text' %>  <!-- IDを追加 -->
+  </div>
+
+  <div class="field">
+    <%= form.label :password, t('views.sessions.new.form.password') %><br>
+    <%= form.password_field :password, id: 'session_password' %>  <!-- IDを追加 -->
+  </div>
+
+  <div class="actions">
+    <%= form.submit t('views.sessions.new.form.login'), id: 'create-session' %>
+  </div>
+<% end %>
