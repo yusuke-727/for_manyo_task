@@ -32,20 +32,18 @@
         <div class="navbar-nav ml-auto">
           <% if logged_in? %>
             <% if current_user.admin? %>
-              <%= link_to 'ユーザ一覧', admin_users_path, class: 'nav-item nav-link' %>
-              <%= link_to 'ユーザを登録する', new_admin_user_path, class: 'nav-item nav-link' %>
+              <%= link_to 'ユーザ一覧', admin_users_path, class: 'nav-item nav-link', id: 'users-index' %>
+              <%= link_to 'ユーザを登録する', new_admin_user_path, class: 'nav-item nav-link', id: 'add-user' %>
             <% end %>
-            <%= link_to t('views.navigation.tasks_index'), tasks_path, class: 'nav-item nav-link' %>
-            <%= link_to t('views.navigation.new_task'), new_task_path, class: 'nav-item nav-link' %>
-            <% if current_user && !current_user.admin? %> 
-              <%= link_to 'ラベル一覧', labels_path, class: 'nav-item nav-link' %>
-              <%= link_to 'ラベルを登録する', new_label_path, class: 'nav-item nav-link' %>
-            <% end %>
-            <%= link_to t('views.navigation.account_setting'), user_path(current_user), class: 'nav-item nav-link' %>
-            <%= link_to t('views.navigation.sign_out'), logout_path, method: :delete, class: 'nav-item nav-link' %>
+            <%= link_to t('views.navigation.tasks_index'), tasks_path, class: 'nav-item nav-link', id: 'tasks-index' %>
+            <%= link_to t('views.navigation.new_task'), new_task_path, class: 'nav-item nav-link', id: 'new-task' %>
+            <%= link_to 'ラベル一覧', labels_path, class: 'nav-item nav-link', id: 'labels-index' %>
+            <%= link_to 'ラベルを登録する', new_label_path, class: 'nav-item nav-link', id: 'new-label' %>
+            <%= link_to t('views.navigation.account_setting'), user_path(current_user), class: 'nav-item nav-link', id: 'account-setting' %>
+            <%= link_to t('views.navigation.sign_out'), logout_path, method: :delete, class: 'nav-item nav-link', id: 'sign-out' %>
           <% else %>
-            <%= link_to t('views.navigation.sign_up'), new_user_path, class: 'nav-item nav-link' %>
-            <%= link_to t('views.navigation.sign_in'), new_session_path, class: 'nav-item nav-link' %>
+            <%= link_to t('views.navigation.sign_up'), new_user_path, class: 'nav-item nav-link', id: 'sign-up' %>
+            <%= link_to t('views.navigation.sign_in'), new_session_path, class: 'nav-item nav-link', id: 'sign-in' %>
           <% end %>
         </div>
       </div>
