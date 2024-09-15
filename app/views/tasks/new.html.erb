@@ -1,44 +1,58 @@
-<h1><%= t('views.tasks.new.title') %></h1>
-<%= form_with model: @task, local: true do |form| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> <%= t('errors.messages.prohibited_this', count: @task.errors.count) %>:</h2>
-      <ul>
-       <% @task.errors.each do |attribute, message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container">
+  <h1><%= t('views.tasks.new.title') %></h1>
+  <%= form_with model: @task, local: true, class: "w-50 mx-auto" do |form| %>
+    <% if @task.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(@task.errors.count, "error") %> <%= t('errors.messages.prohibited_this', count: @task.errors.count) %>:</h2>
+        <ul>
+          <% @task.errors.each do |attribute, message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :title, t('views.tasks.new.form.title') %>
+      <%= form.text_field :title, class: "form-control" %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :title, t('views.tasks.new.form.title') %><br>
-    <%= form.text_field :title %>
+    <div class="form-group">
+      <%= form.label :content, t('views.tasks.new.form.content') %>
+      <%= form.text_area :content, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :deadline_on, t('views.tasks.new.form.deadline_on') %>
+      <%= form.date_field :deadline_on, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :priority, t('views.tasks.new.form.priority') %>
+      <%= form.select :priority, options_for_select(Task.priorities.keys.map { |w| [I18n.t("tasks.priority.#{w}"), w] }, selected: ''), {include_blank: true}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :status, t('views.tasks.new.form.status') %>
+      <%= form.select :status, options_for_select(Task.statuses.keys.map { |w| [I18n.t("tasks.status.#{w}"), w] }, selected: ''), {include_blank: true}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :label_ids, t('views.tasks.new.form.labels') %>
+      <%= form.collection_check_boxes(:label_ids, current_user.labels, :id, :name, {multiple: true}, {class: "form-check-input"}) do |b| %>
+        <div class="form-check">
+          <%= b.check_box %>
+          <%= b.label class: "form-check-label" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit t('views.tasks.new.form.create'), id: 'create-task', class: "btn btn-primary" %>
+    </div>
+  <% end %> <!-- form_withの閉じタグ -->
+
+  <div class="text-center">
+    <%= link_to t('views.tasks.new.form.back'), tasks_path, id: 'back', class: "btn btn-link" %>
   </div>
-
-  <div class="field">
-    <%= form.label :content, t('views.tasks.new.form.content') %><br>
-    <%= form.text_area :content %>
-  </div>
-
-  <div class="field">
-    <%= form.label :deadline_on, t('views.tasks.new.form.deadline_on') %><br>
-    <%= form.date_field :deadline_on %>
-  </div>
-
-  <div class="field">
-    <%= form.label :priority, t('views.tasks.new.form.priority') %><br>
-    <%= form.select :priority, options_for_select(Task.priorities.keys.map { |w| [I18n.t("tasks.priority.#{w}"), w] }, selected: ''), {include_blank: true} %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status, t('views.tasks.new.form.status') %><br>
-    <%= form.select :status, options_for_select(Task.statuses.keys.map { |w| [I18n.t("tasks.status.#{w}"), w] }, selected: ''), {include_blank: true} %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit t('views.tasks.new.form.create'), id: 'create-task' %>
-  </div>
-<% end %>
-
-<%= link_to t('views.tasks.new.form.back'), tasks_path, id: 'back' %>
+</div>

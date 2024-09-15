@@ -11,13 +11,18 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # params[:session][:email]がnilまたは空白の場合のチェック
     if params[:session].nil? || params[:session][:email].blank?
       flash.now[:alert] = I18n.t('activerecord.errors.models.user.attributes.email.blank')
       render 'new'
       return
     end
-
+  
+    if params[:session][:password].blank?
+      flash.now[:alert] = I18n.t('activerecord.errors.models.user.attributes.password.blank')
+      render 'new'
+      return
+    end
+  
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
@@ -28,6 +33,7 @@ class SessionsController < ApplicationController
       render 'new'
     end
   end
+  
 
   def destroy
     session[:user_id] = nil

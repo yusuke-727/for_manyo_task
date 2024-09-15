@@ -1,33 +1,34 @@
-<h1>ユーザ詳細ページ</h1>
+<div class="container">
+  <h1>ユーザ詳細ページ</h1>
 
-<p>名前: <%= @user.name %></p>
-<p>メールアドレス: <%= @user.email %></p>
+  <p><strong>名前:</strong> <%= @user.name %></p>
+  <p><strong>メールアドレス:</strong> <%= @user.email %></p>
+  <p><strong>管理者権限:</strong> <%= @user.admin? ? 'あり' : 'なし' %></p>
 
-<p>管理者権限: <%= @user.admin? ? 'あり' : 'なし' %></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>タイトル</th>
-      <th>内容</th>
-      <th>作成日時</th>
-      <th>終了期限</th>
-      <th>優先度</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user.tasks.each do |task| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= task.title %></td>
-        <td><%= task.content %></td>
-        <td><%= task.created_at.strftime("%Y/%m/%d %H:%M") %></td>
-        <td><%= task.deadline_on.strftime("%Y/%m/%d") %></td>
-        <td><%= I18n.t("enums.priority.#{task.priority}") %></td>
-        <td><%= I18n.t("enums.status.#{task.status}") %></td>        
+        <th>タイトル</th>
+        <th>内容</th>
+        <th>作成日時</th>
+        <th>終了期限</th>
+        <th>優先度</th>
+        <th>ステータス</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @user.tasks.each do |task| %>
+        <tr>
+          <td><%= task.title %></td>
+          <td><%= task.content %></td>
+          <td><%= task.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td><%= task.deadline_on.strftime("%Y/%m/%d") %></td>
+          <td><%= I18n.t("enums.priority.#{task.priority}") %></td>
+          <td><%= I18n.t("enums.status.#{task.status}") %></td>        
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to '戻る', admin_users_path, id: 'back' %>
+  <%= link_to '戻る', admin_users_path, id: 'back', class: 'btn btn-secondary' %>
+</div>

@@ -1,5 +1,9 @@
 class Task < ApplicationRecord
-  belongs_to :user  # この行を追加
+  belongs_to :user
+
+  # ラベル関連のアソシエーションを追加
+  has_many :labelings, dependent: :destroy
+  has_many :labels, through: :labelings
 
   enum priority: { low: 0, medium: 1, high: 2 }
   enum status: { not_started: 0, in_progress: 1, done: 2 }

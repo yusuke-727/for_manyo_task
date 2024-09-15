@@ -1,7 +1,10 @@
 ja:
   activerecord:
+    errors:
+      format: "%{message}"
     models:
       user: ユーザ
+      label: ラベル
     attributes:
       user:
         name: 名前
@@ -9,13 +12,14 @@ ja:
         password: パスワード
         admin: 管理者権限
       task:
-        title: "タイトルを入力してください"
-        content: "内容を入力してください"
-        deadline_on: "終了期限を入力してください"
-        priority: "優先度を入力してください"
-        status: "ステータスを入力してください"
+        title: タイトル
+        content: 内容
+        deadline_on: 終了期限
+        priority: 優先度
+        status: ステータス
+      label:
+        name: 名前
     errors:
-      format: "%{message}"
       models:
         user:
           attributes:
@@ -45,6 +49,11 @@ ja:
               blank: "優先度を入力してください"
             status:
               blank: "ステータスを入力してください"
+        label:
+          attributes:
+            name:
+              blank: "名前を入力してください"
+
       messages:
         record_invalid: "レコードが無効です: %{errors}"
   enums: 
@@ -110,6 +119,7 @@ ja:
         search:
           status: "ステータス"
           title: "タイトル"
+          label: "ラベル"
           submit: "検索"
         actions:
           show: "詳細"
@@ -126,6 +136,7 @@ ja:
           status: "ステータス"
           create: "登録する"
           back: "戻る"
+          labels: "ラベル"
       show:
         title: "タスク詳細ページ"
         attributes:
@@ -135,6 +146,7 @@ ja:
           deadline_on: "終了期限"
           priority: "優先度"
           status: "ステータス"
+          labels: "ラベル"
       edit:
         title: "タスク編集ページ"
         form:
@@ -145,6 +157,7 @@ ja:
           status: "ステータス"
           update: "更新する"
           back: "戻る"
+          labels: "ラベル"
       flash:
         create: "タスクを登録しました"
         update: "タスクを更新しました"

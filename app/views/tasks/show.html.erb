@@ -1,34 +1,43 @@
-<h1><%= t('views.tasks.show.title') %></h1>
+<div class="container">
+  <h1><%= t('views.tasks.show.title') %></h1>
 
-<p>
-  <strong><%= t('views.tasks.show.attributes.title') %>:</strong>
-  <%= @task.title %>
-</p>
+  <div class="mb-3">
+    <strong><%= t('views.tasks.show.attributes.title') %>:</strong>
+    <p class="form-control-static"><%= @task.title %></p>
+  </div>
 
-<p>
-  <strong><%= t('views.tasks.show.attributes.content') %>:</strong>
-  <%= @task.content %>
-</p>
+  <div class="mb-3">
+    <strong><%= t('views.tasks.show.attributes.content') %>:</strong>
+    <p class="form-control-static"><%= @task.content %></p>
+  </div>
 
-<p>
-  <strong><%= t('views.tasks.show.attributes.created_at') %>:</strong>
-  <%= @task.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
-</p>
+  <div class="mb-3">
+    <strong><%= t('views.tasks.show.attributes.created_at') %>:</strong>
+    <p class="form-control-static"><%= @task.created_at.strftime('%Y-%m-%d %H:%M:%S') %></p>
+  </div>
 
-<p>
-  <strong><%= t('views.tasks.show.attributes.deadline_on') %>:</strong>
-  <%= @task.deadline_on %>
-</p>
+  <div class="mb-3">
+    <strong><%= t('views.tasks.show.attributes.deadline_on') %>:</strong>
+    <p class="form-control-static"><%= @task.deadline_on %></p>
+  </div>
 
-<p>
-  <strong><%= t('views.tasks.show.attributes.priority') %>:</strong>
-  <%= I18n.t("tasks.priority.#{@task.priority}") %>
-</p>
+  <div class="mb-3">
+    <strong><%= t('views.tasks.show.attributes.priority') %>:</strong>
+    <p class="form-control-static"><%= I18n.t("tasks.priority.#{@task.priority}") %></p>
+  </div>
 
-<p>
-  <strong><%= t('views.tasks.show.attributes.status') %>:</strong>
-  <%= I18n.t("tasks.status.#{@task.status}") %>
-</p>
+  <div class="mb-3">
+    <strong><%= t('views.tasks.show.attributes.status') %>:</strong>
+    <p class="form-control-static"><%= I18n.t("tasks.status.#{@task.status}") %></p>
+  </div>
 
-<%= link_to t('views.tasks.index.actions.edit'), edit_task_path(@task), id: 'edit-task' %> |
-<%= link_to t('views.tasks.new.form.back'), tasks_path, id: 'back' %>
+  <div class="mb-3">
+    <strong><%= t('views.tasks.show.attributes.labels') %>:</strong>
+    <p class="form-control-static"><%= @task.labels.map(&:name).join(' ') %></p>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to t('views.tasks.index.actions.edit'), edit_task_path(@task), id: 'edit-task', class: 'btn btn-primary' %> |
+    <%= link_to t('views.tasks.new.form.back'), tasks_path, id: 'back', class: 'btn btn-secondary' %>
+  </div>
+</div>

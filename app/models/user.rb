@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :tasks, dependent: :destroy
+  has_many :labels, dependent: :destroy
   before_save { self.email = email.downcase }
   before_validation :set_default_password_confirmation, if: -> { password.present? && password_confirmation.nil? }
 

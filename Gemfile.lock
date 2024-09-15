@@ -115,6 +115,9 @@ GEM
     kaminari-activerecord (1.2.2)
       activerecord
       kaminari-core (= 1.2.2)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     kaminari-core (1.2.2)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -297,6 +300,7 @@ DEPENDENCIES
   faker
   jbuilder (~> 2.7)
   kaminari
+  kaminari-bootstrap
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)

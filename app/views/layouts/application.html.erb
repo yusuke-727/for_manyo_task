@@ -1,6 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Task Management</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,35 +17,54 @@
   </head>
 
   <body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <header>
-      <nav>
-        <ul>
-        <% if logged_in? %>
-        <% if current_user.admin? %>
-          <li><%= link_to 'ユーザ一覧', admin_users_path, id: 'users-index' %></li>
-          <li><%= link_to 'ユーザを登録する', new_admin_user_path, id: 'add-user' %></li>
-        <% end %>
-        <li><%= link_to t('views.navigation.tasks_index'), tasks_path, id: 'tasks-index' %></li>
-        <li><%= link_to t('views.navigation.new_task'), new_task_path, id: 'new-task' %></li>
-        <li><%= link_to t('views.navigation.account_setting'), user_path(current_user), id: 'account-setting' %></li>
-        <li><%= link_to t('views.navigation.sign_out'), logout_path, method: :delete, id: 'sign-out' %></li>
-      <% else %>
-        <li><%= link_to t('views.navigation.sign_up'), new_user_path, id: 'sign-up' %></li>
-        <li><%= link_to t('views.navigation.sign_in'), new_session_path, id: 'sign-in' %></li>
-      <% end %>
-        </ul>
-      </nav>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Task App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <% if logged_in? %>
+            <% if current_user.admin? %>
+              <%= link_to 'ユーザ一覧', admin_users_path, class: 'nav-item nav-link' %>
+              <%= link_to 'ユーザを登録する', new_admin_user_path, class: 'nav-item nav-link' %>
+            <% end %>
+            <%= link_to t('views.navigation.tasks_index'), tasks_path, class: 'nav-item nav-link' %>
+            <%= link_to t('views.navigation.new_task'), new_task_path, class: 'nav-item nav-link' %>
+            <% if current_user && !current_user.admin? %> 
+              <%= link_to 'ラベル一覧', labels_path, class: 'nav-item nav-link' %>
+              <%= link_to 'ラベルを登録する', new_label_path, class: 'nav-item nav-link' %>
+            <% end %>
+            <%= link_to t('views.navigation.account_setting'), user_path(current_user), class: 'nav-item nav-link' %>
+            <%= link_to t('views.navigation.sign_out'), logout_path, method: :delete, class: 'nav-item nav-link' %>
+          <% else %>
+            <%= link_to t('views.navigation.sign_up'), new_user_path, class: 'nav-item nav-link' %>
+            <%= link_to t('views.navigation.sign_in'), new_session_path, class: 'nav-item nav-link' %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
 
     <% if flash[:notice] %>
-      <p id="notice" class="flash notice"><%= flash[:notice] %></p>
+      <div class="alert alert-success" role="alert">
+        <%= flash[:notice] %>
+      </div>
     <% end %>
 
     <% if flash[:alert] %>
-      <p id="alert" class="flash alert"><%= flash[:alert] %></p>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:alert] %>
+      </div>
     <% end %>
 
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

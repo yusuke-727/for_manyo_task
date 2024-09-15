@@ -1,43 +1,45 @@
-<h1>ユーザ登録ページ</h1>
+<div class="container">
+  <h1 class="mb-4">ユーザ登録ページ</h1>
 
-<%= form_with(model: @user, url: admin_users_path, local: true) do |form| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "エラー") %>が発生しました:</h2>
-      <ul>
-         <% @user.errors.each do |attribute, message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: @user, url: admin_users_path, local: true, class: "w-50 mx-auto") do |form| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(@user.errors.count, "エラー") %>が発生しました:</h2>
+        <ul>
+           <% @user.errors.each do |attribute, message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :name, "名前" %>
+      <%= form.text_field :name, id: 'name', class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :email, "メールアドレス" %>
+      <%= form.text_field :email, type: 'text', id: 'email', class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password, "パスワード" %>
+      <%= form.password_field :password, id: 'password', class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :password_confirmation, "パスワード（確認）" %>
+      <%= form.password_field :password_confirmation, id: 'password_confirmation', class: "form-control" %>
+    </div>
+
+    <div class="form-group form-check">
+      <%= form.check_box :admin, class: "form-check-input", id: 'admin' %>
+      <%= form.label :admin, "管理者権限", class: "form-check-label" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "登録する", id: 'create-user', class: "btn btn-primary" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name, "名前" %><br>
-    <%= form.text_field :name, id: 'name' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email, "メールアドレス" %><br>
-    <%= form.text_field :email, type: 'text', id: 'email' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password, "パスワード" %><br>
-    <%= form.password_field :password, id: 'password' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_confirmation, "パスワード（確認）" %><br>
-    <%= form.password_field :password_confirmation, id: 'password_confirmation' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :admin, "管理者権限" %><br>
-    <%= form.check_box :admin %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "登録する", id: 'create-user' %>
-  </div>
-<% end %>
+</div>

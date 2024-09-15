@@ -1,45 +1,56 @@
-<h1><%= t('views.tasks.edit.title') %></h1>
-<%= form_with model: @task, local: true do |form| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<div class="container">
+  <h1><%= t('views.tasks.edit.title') %></h1>
+  <%= form_with model: @task, local: true do |form| %>
+    <% if @task.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+        <ul>
+          <% @task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% @task.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="form-group">
+      <%= form.label :title, t('views.tasks.edit.form.title') %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :content, t('views.tasks.edit.form.content') %>
+      <%= form.text_area :content, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :deadline_on, t('views.tasks.edit.form.deadline_on') %>
+      <%= form.date_field :deadline_on, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :priority, t('views.tasks.edit.form.priority') %>
+      <%= form.select :priority, [['', '']] + Task.priorities.keys.map { |w| [I18n.t("tasks.priority.#{w}"), w] }, {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :status, t('views.tasks.edit.form.status') %>
+      <%= form.select :status, Task.statuses.keys.map { |w| [I18n.t("tasks.status.#{w}"), w] }, {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :label_ids, t('views.tasks.edit.form.labels') %>
+      <% Label.all.each do |label| %>
+        <div class="form-check">
+          <%= form.check_box :label_ids, { multiple: true, include_hidden: false, class: "form-check-input" }, label.id, @task.label_ids.include?(label.id) %>
+          <%= label.name %><br>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit t('views.tasks.edit.form.update'), id: 'update-task', class: "btn btn-primary" %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title, t('views.tasks.edit.form.title') %><br>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :content, t('views.tasks.edit.form.content') %><br>
-    <%= form.text_area :content %>
-  </div>
-
-  <div class="field">
-    <%= form.label :deadline_on, t('views.tasks.edit.form.deadline_on') %><br>
-    <%= form.date_field :deadline_on %>
-  </div>
-
-  <div class="field">
-    <%= form.label :priority, t('views.tasks.edit.form.priority') %><br>
-    <%= form.select :priority, [['', '']] + Task.priorities.keys.map { |w| [I18n.t("tasks.priority.#{w}"), w] } %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status, t('views.tasks.edit.form.status') %><br>
-    <%= form.select :status, Task.statuses.keys.map { |w| [I18n.t("tasks.status.#{w}"), w] } %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit t('views.tasks.edit.form.update'), id: 'update-task' %>
-  </div>
-<% end %>
-
-<%= link_to t('views.tasks.edit.form.back'), tasks_path, id: 'back' %>
+  <%= link_to t('views.tasks.edit.form.back'), tasks_path, id: 'back', class: "btn btn-secondary mt-3" %>
+</div>
