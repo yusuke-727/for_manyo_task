@@ -22,7 +22,7 @@
           <td><%= label.tasks.count %></td>
           <td>
             <%= link_to '編集', edit_label_path(label), class: 'btn btn-sm btn-secondary' %>
-            <%= link_to '削除', label, method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-danger' %>
+            <%= link_to '削除', label, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn btn-sm btn-danger' %>
           </td>
         </tr>
       <% end %>

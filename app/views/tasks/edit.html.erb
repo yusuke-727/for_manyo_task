@@ -39,14 +39,15 @@
 
     <div class="form-group">
       <%= form.label :label_ids, t('views.tasks.edit.form.labels') %>
-      <% Label.all.each do |label| %>
+      <% Label.where(user: current_user).each do |label| %>
         <div class="form-check">
           <%= form.check_box :label_ids, { multiple: true, include_hidden: false, class: "form-check-input" }, label.id, @task.label_ids.include?(label.id) %>
-          <%= label.name %><br>
-        </div>
-      <% end %>
-    </div>
+         <%= label.name %><br>
+      </div>
+    <% end %>
+  </div>
 
+  
     <div class="actions">
       <%= form.submit t('views.tasks.edit.form.update'), id: 'update-task', class: "btn btn-primary" %>
     </div>
